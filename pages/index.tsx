@@ -1,8 +1,9 @@
+import 'tailwindcss/tailwind.css'
 import Head from 'next/head'
 import Image from 'next/image'
 
 export const Home = (): JSX.Element => (
-  <div className="container">
+  <div className="container bg-ecologi-brown">
     <Head>
       <title>Create Next App</title>
       <link rel="icon" href="/favicon.ico" />
