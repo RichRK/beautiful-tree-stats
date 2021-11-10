@@ -1,60 +1,38 @@
 import 'tailwindcss/tailwind.css'
 import Head from 'next/head'
+import { getTrees } from '../services/treeService'
+import { useEffect, useState } from 'react'
 
-export const Home = (): JSX.Element => (
-  <div className="main-container bg-ecologi-brown">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+export const Home = (): JSX.Element => {
+  const [treeData, setTreeData] = useState(null)
 
-    <main>
-      <h1 className="title text-center m-0 mb-6">Welcome to Ecologi Tree Stats!</h1>
+  useEffect(() => {
+    const data = getTrees()
+    setTreeData(data)
+  }, [])
 
-      <p className="text-2xl text-center">
-        Here you can find our latest tree planting numbers.
-      </p>
+  useEffect(() => {
+    console.log(treeData)
+  }, [treeData])
 
-    </main>
+  return (
+    <div className="bg-ecologi-brown w-100 px-12 min-h-screen font-body flex flex-col items-center">
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-    <style jsx>{`
-      .main-container {
-        width: 100%;
-        padding: 0 3rem;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+      <main className="py-12 flex-1 flex flex-col items-center">
+        <h1 className="text-6xl text-center leading-tight m-0 mb-6">
+          Welcome to Ecologi Tree Stats!
+        </h1>
 
-      main {
-        padding: 3rem 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .title {
-        line-height: 1.15;
-        font-size: 4rem;
-      }
-    `}</style>
-
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
-  </div>
-)
+        <p className="text-2xl text-center">
+          Here you can find our latest tree planting numbers.
+        </p>
+      </main>
+    </div>
+  )
+}
 
 export default Home
