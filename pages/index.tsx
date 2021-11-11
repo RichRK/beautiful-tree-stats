@@ -47,7 +47,7 @@ export const Home = (): JSX.Element => {
         </p>
 
         <Select
-          className="self-end"
+          className="self-end mb-8"
           disabled={!treeData}
           label="Duration"
           onChange={handleDurationChange}
