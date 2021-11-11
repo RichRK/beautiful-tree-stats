@@ -1,18 +1,22 @@
-import Tree from "../models/treeModel";
+import { DateTime } from 'luxon'
+import TreeDate from '../models/treeDateModel'
 
-const mockedData: Tree[] = [
-  { amount: 1 },
-  { amount: 2 },
-  { amount: 3 },
-  { amount: 4 },
-  { amount: 5 },
-  { amount: 6 },
-  { amount: 7 },
-  { amount: 8 },
-  { amount: 9 },
-  { amount: 10 },
-]
+export const produceChartData = (treeDates: number[][]): TreeDate[] => {
+  const massagedTreeDates = {}
+  const chartData = []
 
-export const getTrees = (): Tree[] => {
-  return mockedData;
+  treeDates.forEach((treeDatePair) => {
+    const [quantity, unixEpoch] = treeDatePair
+
+    massagedTreeDates[unixEpoch]
+      ? (massagedTreeDates[unixEpoch] += quantity)
+      : (massagedTreeDates[unixEpoch] = quantity)
+  })
+
+  Object.entries(massagedTreeDates).forEach(([unixEpoch, quantity]) => {
+    const date = DateTime.fromSeconds(parseInt(unixEpoch))
+    chartData.push({ date: date, quantity: quantity })
+  })
+
+  return chartData
 }
