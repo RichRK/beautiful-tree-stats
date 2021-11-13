@@ -3,68 +3,48 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import EcologiLineChart from '../components/ecologi-line-chart'
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import TreeDates from '../data/trees.json'
-import { produceChartData } from '../services/treeService'
+import RawData from '../data/trees.json'
+import {
+  determineMostPlantedInOneDay,
+  determineTotalTreesPlanted,
+  determineUniqueYears,
+  filterTreeData,
+  produceTreeData,
+} from '../services/tree-service'
 import TreeDate from '../models/treeDateModel'
+import StatisticCard from '../components/statistic-card'
+import Common from '../constants/common'
 
 export const Home = (): JSX.Element => {
-  const ENTIRE_DURATION_TEXT = 'all time'
-
   const [dateRanges, setDateRanges] = useState<string[]>([])
   const [filteredTreeData, setFilteredTreeData] = useState<TreeDate[]>([])
+  const [mostPlantedInOneDay, setMostPlantedInOneDay] = useState<number>(0)
   const [selectedDateRange, setSelectedDateRange] = useState<string>('')
+  const [totalTreesPlanted, setTotalTreesPlanted] = useState<number>(0)
   const [treeData, setTreeData] = useState<TreeDate[]>([])
 
   useEffect(() => {
-    const data = produceChartData(TreeDates)
-    setTreeData(data)
+    setTreeData(produceTreeData(RawData))
   }, [])
 
   useEffect(() => {
-    determineUniqueYears()
-
     if (treeData.length) {
       setFilteredTreeData(treeData)
-      // console.log(treeData)
+      setDateRanges(determineUniqueYears(treeData))
+      setTotalTreesPlanted(determineTotalTreesPlanted(treeData))
+      setMostPlantedInOneDay(determineMostPlantedInOneDay(treeData))
     }
   }, [treeData])
 
   useEffect(() => {
     if (dateRanges.length) {
-      setSelectedDateRange(ENTIRE_DURATION_TEXT)
+      setSelectedDateRange(Common.FULL_DURATION_TEXT)
     }
   }, [dateRanges])
 
   useEffect(() => {
-    filterTreeData()
+    setFilteredTreeData(filterTreeData(treeData, selectedDateRange))
   }, [selectedDateRange])
-
-  const determineUniqueYears = (): void => {
-    const uniqueYears: Set<string> = new Set()
-
-    treeData.forEach((treeDate) => {
-      uniqueYears.add(treeDate.date.year.toString())
-    })
-
-    if (uniqueYears.size) {
-      const yearsForDisplay = Array.from(uniqueYears).sort().reverse()
-      yearsForDisplay.unshift(ENTIRE_DURATION_TEXT)
-      setDateRanges(yearsForDisplay)
-    }
-  }
-
-  const filterTreeData = (): void => {
-    const isANumber = !!parseInt(selectedDateRange)
-
-    if (isANumber) {
-      const newData = treeData.filter(
-        (treeDate) => treeDate.date.year == parseInt(selectedDateRange)
-      )
-      setFilteredTreeData(newData)
-    } else {
-      setFilteredTreeData([...treeData])
-    }
-  }
 
   const getXAxisKey = (data: TreeDate): string => {
     return data.date.toLocaleString()
@@ -81,7 +61,7 @@ export const Home = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="py-12 max-w-full flex flex-col items-center">
+      <main className="pt-12 pb-24 max-w-full flex flex-col items-center">
         <h1 className="text-6xl text-center leading-tight m-0 mb-6">
           Welcome to Ecologi Tree Stats!
         </h1>
@@ -112,6 +92,33 @@ export const Home = (): JSX.Element => {
           lineKey="quantity"
           xAxisKey={getXAxisKey}
         />
+
+        <p className="mt-6 text-gray-600 text-sm text-center">
+          {
+            "(Some days exceed the graph's scale, for better overall legibility.)"
+          }
+        </p>
+
+        <div className="w-full mt-12 grid grid-cols-2 gap-4 md:gap-10">
+          <StatisticCard
+            amount={totalTreesPlanted}
+            title="Total trees planted"
+          />
+          <StatisticCard
+            amount={mostPlantedInOneDay}
+            title="Most trees planted in one day"
+          />
+          <StatisticCard
+            amount={1450}
+            emoji="🌵"
+            title="Known species of cacti"
+          />
+          <StatisticCard
+            amount={35000}
+            emoji="🦓"
+            title="Estimated population of mountain zebras"
+          />
+        </div>
       </main>
     </div>
   )

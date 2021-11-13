@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      borderWidth: {
+        '1': '1px',
+      },
       colors: {
         'ecologi-green': '#035f48',
         'ecologi-brown': '#e8e4df',
