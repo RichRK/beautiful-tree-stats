@@ -79,8 +79,14 @@ export const Home = (): JSX.Element => {
       </Head>
 
       <main className="pt-12 pb-24 max-w-full flex flex-col items-center">
-        <h1 className="text-6xl text-center leading-tight m-0 mb-6">
-          Welcome to Ecologi Tree Stats!
+        <h1 className="text-6xl text-center leading-tight m-0 mb-4">
+          Welcome to
+          <img
+            alt="Ecologi"
+            className="inline h-24 ml-6 mr-5 pt-2"
+            src="/ecologi-logo.svg"
+          />
+          Tree Stats!
         </h1>
 
         <h2 className="text-2xl mb-10 text-center">
