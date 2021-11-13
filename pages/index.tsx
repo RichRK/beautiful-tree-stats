@@ -1,19 +1,21 @@
 import 'tailwindcss/tailwind.css'
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import EcologiLineChart from '../components/ecologi-line-chart'
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import RawData from '../data/trees.json'
+import Common from '../constants/common'
 import {
   determineMostPlantedInOneDay,
   determineTotalTreesPlanted,
+  determineTreesByYear,
   determineUniqueYears,
   filterTreeData,
   produceTreeData,
 } from '../services/tree-service'
-import TreeDate from '../models/treeDateModel'
+import EcologiChart from '../components/ecologi-chart'
+import Head from 'next/head'
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import RawData from '../data/trees.json'
 import StatisticCard from '../components/statistic-card'
-import Common from '../constants/common'
+import TreeDate from '../models/tree-date-model'
+import TreesByYear from '../models/trees-by-year-model'
+import { useEffect, useState } from 'react'
 
 export const Home = (): JSX.Element => {
   const [dateRanges, setDateRanges] = useState<string[]>([])
@@ -22,6 +24,8 @@ export const Home = (): JSX.Element => {
   const [selectedDateRange, setSelectedDateRange] = useState<string>('')
   const [totalTreesPlanted, setTotalTreesPlanted] = useState<number>(0)
   const [treeData, setTreeData] = useState<TreeDate[]>([])
+  const [treesByYear, setTreesByYear] = useState<TreesByYear[]>([])
+  const [uniqueYears, setUniqueYears] = useState<number[]>([])
 
   useEffect(() => {
     setTreeData(produceTreeData(RawData))
@@ -30,11 +34,24 @@ export const Home = (): JSX.Element => {
   useEffect(() => {
     if (treeData.length) {
       setFilteredTreeData(treeData)
-      setDateRanges(determineUniqueYears(treeData))
+      setUniqueYears(determineUniqueYears(treeData))
       setTotalTreesPlanted(determineTotalTreesPlanted(treeData))
       setMostPlantedInOneDay(determineMostPlantedInOneDay(treeData))
     }
   }, [treeData])
+
+  useEffect(() => {
+    if (uniqueYears.length) {
+      const yearsForDisplay = uniqueYears
+        .map((year) => year.toString())
+        .sort()
+        .reverse()
+      yearsForDisplay.unshift(Common.FULL_DURATION_TEXT)
+      setDateRanges(yearsForDisplay)
+      // Also determining 'trees by year' here too, for the pie chart
+      setTreesByYear(determineTreesByYear(treeData, uniqueYears))
+    }
+  }, [uniqueYears])
 
   useEffect(() => {
     if (dateRanges.length) {
@@ -87,19 +104,20 @@ export const Home = (): JSX.Element => {
           })}
         </Select>
 
-        <EcologiLineChart
+        <EcologiChart
+          chartType="line"
           data={filteredTreeData}
-          lineKey="quantity"
-          xAxisKey={getXAxisKey}
+          primaryDataKey="quantity"
+          labelKey={getXAxisKey}
         />
 
-        <p className="mt-6 text-gray-600 text-sm text-center">
+        <p className="mt-8 text-gray-600 text-sm text-center">
           {
             "(Some days exceed the graph's scale, for better overall legibility.)"
           }
         </p>
 
-        <div className="w-full mt-12 grid grid-cols-2 gap-4 md:gap-10">
+        <div className="w-full my-16 grid grid-cols-2 gap-4 md:gap-10">
           <StatisticCard
             amount={totalTreesPlanted}
             title="Total trees planted"
@@ -119,6 +137,17 @@ export const Home = (): JSX.Element => {
             title="Estimated population of mountain zebras"
           />
         </div>
+
+        <h2 className="italic text-2xl mb-10 text-center">
+          Trees planted per year:
+        </h2>
+
+        <EcologiChart
+          chartType="pie"
+          data={treesByYear}
+          primaryDataKey="quantity"
+          labelKey="year"
+        />
       </main>
     </div>
   )

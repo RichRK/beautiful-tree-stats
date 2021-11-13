@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import TreeDate from '../models/treeDateModel'
-import Common from '../constants/common'
+import TreeDate from '../models/tree-date-model'
+import TreesByYear from '../models/trees-by-year-model'
 
 export const determineMostPlantedInOneDay = (treeData: TreeDate[]): number => {
   let mostPlanted = 0
@@ -20,33 +20,52 @@ export const determineTotalTreesPlanted = (treeData: TreeDate[]): number => {
   return totalTrees
 }
 
-export const determineUniqueYears = (treeData: TreeDate[]): string[] => {
-  const uniqueYears: Set<string> = new Set()
+export const determineTreesByYear = (
+  treeData: TreeDate[],
+  years: number[]
+): TreesByYear[] => {
+  const yearlyTotals: any = {}
 
-  treeData.forEach((treeDate) => {
-    uniqueYears.add(treeDate.date.year.toString())
+  years.forEach((year) => {
+    yearlyTotals[year] = 0
   })
 
-  if (uniqueYears.size) {
-    const yearsForDisplay = Array.from(uniqueYears).sort().reverse()
-    yearsForDisplay.unshift(Common.FULL_DURATION_TEXT)
-    return yearsForDisplay
-  } else {
-    return ['']
-  }
+  treeData.forEach((treeDate) => {
+    yearlyTotals[treeDate.date.year] += treeDate.quantity
+  })
+
+  const treesByYear = Object.entries(yearlyTotals).map(
+    ([year, quantity]: [string, number]) => ({
+      year: year,
+      quantity: quantity,
+    })
+  )
+  
+  return treesByYear
 }
 
-export const filterTreeData = (treeData: TreeDate[], dateRange: string): TreeDate[] => {
+export const determineUniqueYears = (treeData: TreeDate[]): number[] => {
+  const uniqueYears: Set<number> = new Set()
+  treeData.forEach((treeDate) => {
+    uniqueYears.add(treeDate.date.year)
+  })
+  return Array.from(uniqueYears)
+}
+
+export const filterTreeData = (
+  treeData: TreeDate[],
+  dateRange: string
+): TreeDate[] => {
   const isANumber = !!parseInt(dateRange)
 
-    if (isANumber) {
-      const newData = treeData.filter(
-        (treeDate) => treeDate.date.year == parseInt(dateRange)
-      )
-      return newData
-    } else {
-      return [...treeData]
-    }
+  if (isANumber) {
+    const newData = treeData.filter(
+      (treeDate) => treeDate.date.year == parseInt(dateRange)
+    )
+    return newData
+  } else {
+    return [...treeData]
+  }
 }
 
 export const produceTreeData = (treeDates: number[][]): TreeDate[] => {
