@@ -9,11 +9,11 @@ import {
 
 type Props = {
   data: any
-  xAxisKey: string
   lineKey: string
+  xAxisKey: string
 }
 
-const EcologiLineChart = ({ data, xAxisKey, lineKey }: Props): JSX.Element => {
+const EcologiLineChart = ({ data, lineKey, xAxisKey }: Props): JSX.Element => {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart width={400} height={400} data={data}>
