@@ -3,135 +3,174 @@
 exports[`Home page matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="jsx-1276654382 container"
+    class="bg-ecologi-brown w-100 px-12 min-h-screen font-body flex flex-col items-center"
   >
     <main
-      class="jsx-1276654382"
+      class="pt-12 pb-24 max-w-full flex flex-col items-center"
     >
       <h1
-        class="jsx-1276654382 title"
+        class="text-6xl text-center leading-tight m-0 mb-4"
       >
-        Welcome to 
-        <a
-          class="jsx-1276654382"
-          href="https://nextjs.org"
-        >
-          Next.js!
-        </a>
+        Welcome to
+        <img
+          alt="Ecologi"
+          class="inline h-24 ml-6 mr-5 pt-2"
+          src="/ecologi-logo.svg"
+        />
+        Tree Stats!
       </h1>
-      <p
-        class="jsx-1276654382 description"
+      <h2
+        class="text-2xl mb-10 text-center"
       >
-        Get started by editing 
-        <code
-          class="jsx-1276654382"
-        >
-          pages/index.tsx
-        </code>
-      </p>
-      <button
-        class="jsx-1276654382"
-      >
-        Test Button
-      </button>
+        Here you can find our latest tree planting numbers.
+      </h2>
       <div
-        class="jsx-1276654382 grid"
+        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiSelect-root self-end mb-8 css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
       >
-        <a
-          class="jsx-1276654382 card"
-          href="https://nextjs.org/docs"
-        >
-          <h3
-            class="jsx-1276654382"
-          >
-            Documentation →
-          </h3>
-          <p
-            class="jsx-1276654382"
-          >
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-        <a
-          class="jsx-1276654382 card"
-          href="https://nextjs.org/learn"
-        >
-          <h3
-            class="jsx-1276654382"
-          >
-            Learn →
-          </h3>
-          <p
-            class="jsx-1276654382"
-          >
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-        <a
-          class="jsx-1276654382 card"
-          href="https://github.com/vercel/next.js/tree/master/examples"
-        >
-          <h3
-            class="jsx-1276654382"
-          >
-            Examples →
-          </h3>
-          <p
-            class="jsx-1276654382"
-          >
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-        <a
-          class="jsx-1276654382 card"
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        >
-          <h3
-            class="jsx-1276654382"
-          >
-            Deploy →
-          </h3>
-          <p
-            class="jsx-1276654382"
-          >
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-    <footer
-      class="jsx-1276654382"
-    >
-      <a
-        class="jsx-1276654382"
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Powered by 
         <div
-          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          class="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          role="button"
+          tabindex="0"
         >
-          <div
-            style="box-sizing: border-box; display: block; max-width: 100%;"
-          >
-            <img
-              alt=""
-              aria-hidden="true"
-              role="presentation"
-              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-            />
-          </div>
-          <img
-            alt="Vercel Logo"
-            decoding="async"
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-          />
+          all time
         </div>
-      </a>
-    </footer>
+        <input
+          aria-hidden="true"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          tabindex="-1"
+          value="all time"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-173wfxe"
+          >
+            <span>
+              Duration
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <div
+        class="recharts-responsive-container"
+        style="width: 100%; height: 300px;"
+      />
+      <p
+        class="mt-8 text-gray-600 text-sm text-center"
+      >
+        (Some days exceed the graph's scale, for better overall legibility.)
+      </p>
+      <div
+        class="w-full my-16 grid grid-cols-2 gap-4 md:gap-10"
+      >
+        <div
+          class="flex flex-col justify-center text-center shadow-md border-1 border-gray-400 p-2 sm:p-6 md:p-8 rounded-md"
+        >
+          <p
+            class="text-4xl md:text-5xl font-bold mb-2 md:mb-3"
+          >
+            49,249
+          </p>
+          <div
+            class="flex justify-center"
+          >
+            <h3
+              class="italic"
+            >
+              Total trees planted
+            </h3>
+          </div>
+        </div>
+        <div
+          class="flex flex-col justify-center text-center shadow-md border-1 border-gray-400 p-2 sm:p-6 md:p-8 rounded-md"
+        >
+          <p
+            class="text-4xl md:text-5xl font-bold mb-2 md:mb-3"
+          >
+            14,538
+          </p>
+          <div
+            class="flex justify-center"
+          >
+            <h3
+              class="italic"
+            >
+              Most trees planted in one day
+            </h3>
+          </div>
+        </div>
+        <div
+          class="flex flex-col justify-center text-center shadow-md border-1 border-gray-400 p-2 sm:p-6 md:p-8 rounded-md"
+        >
+          <p
+            class="text-4xl md:text-5xl font-bold mb-2 md:mb-3"
+          >
+            1,450
+          </p>
+          <div
+            class="flex justify-center"
+          >
+            <h3
+              class="italic"
+            >
+              Known species of cacti
+              <span
+                class="ml-1.5 not-italic"
+              >
+                🌵
+              </span>
+            </h3>
+          </div>
+        </div>
+        <div
+          class="flex flex-col justify-center text-center shadow-md border-1 border-gray-400 p-2 sm:p-6 md:p-8 rounded-md"
+        >
+          <p
+            class="text-4xl md:text-5xl font-bold mb-2 md:mb-3"
+          >
+            35,000
+          </p>
+          <div
+            class="flex justify-center"
+          >
+            <h3
+              class="italic"
+            >
+              Estimated population of mountain zebras
+              <span
+                class="ml-1.5 not-italic"
+              >
+                🦓
+              </span>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <h2
+        class="italic text-2xl mb-10 text-center"
+      >
+        Trees planted per year:
+      </h2>
+      <div
+        class="recharts-responsive-container"
+        style="width: 100%; height: 350px;"
+      />
+    </main>
   </div>
 </DocumentFragment>
 `;

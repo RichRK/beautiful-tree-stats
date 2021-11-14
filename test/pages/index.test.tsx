@@ -1,17 +1,18 @@
 import React from 'react'
-import { render, fireEvent } from '../testUtils'
+import { screen, render } from '@testing-library/react'
 import { Home } from '../../pages/index'
+
+const page = <Home />
 
 describe('Home page', () => {
   it('matches snapshot', () => {
-    const { asFragment } = render(<Home />, {})
+    const { asFragment } = render(page, {})
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('clicking button triggers alert', () => {
-    const { getByText } = render(<Home />, {})
-    window.alert = jest.fn()
-    fireEvent.click(getByText('Test Button'))
-    expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
+  it('logo is present', () => {
+    render(page)
+    const image = screen.getByAltText('Ecologi')
+    expect(image.src).toContain('ecologi-logo.svg')
   })
 })

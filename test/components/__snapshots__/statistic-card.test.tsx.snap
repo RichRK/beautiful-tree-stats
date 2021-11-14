@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatisticCard component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col justify-center text-center shadow-md border-1 border-gray-400 p-2 sm:p-6 md:p-8 rounded-md"
+  >
+    <p
+      class="text-4xl md:text-5xl font-bold mb-2 md:mb-3"
+    >
+      11
+    </p>
+    <div
+      class="flex justify-center"
+    >
+      <h3
+        class="italic"
+      >
+        National parks in France
+        <span
+          class="ml-1.5 not-italic"
+        >
+          🏞
+        </span>
+      </h3>
+    </div>
+  </div>
+</DocumentFragment>
+`;
