@@ -12,7 +12,7 @@ describe('Home page', () => {
 
   it('logo is present', () => {
     render(page)
-    const image = screen.getByAltText('Ecologi')
+    const image = screen.getByAltText('Ecologi') as HTMLImageElement
     expect(image.src).toContain('ecologi-logo.svg')
   })
 })
